@@ -1,0 +1,72 @@
+#include <iostream>
+#include <stdlib.h>
+#include <ctype.h>
+using namespace std;
+void ebob_hesapla(int a, int b,int *asonuc);
+void ekok_hesapla(int a, int b,int* bsonuc);
+int main() {
+	string deger;int sayi1, sayi2,sonuc;
+	cout << "ebob mu ekok mu hesaplamak istiyorsun (ebob/ekok) ?";
+	cin >> deger;
+	if (deger == "ebob") {
+		cout << "sayi 1 - sayi 2 girin :" << endl;
+		cin >> sayi1 >> sayi2;
+		cout << "*****************" << endl;
+		ebob_hesapla(sayi1, sayi2,&sonuc);
+		cout << "*****************" << endl;
+		cout << "\nEbob " << sayi1 << "-" << sayi2 << " = " << sonuc;
+	}
+	else if (deger == "ekok") {
+		cout << "sayi 1 - sayi 2 girin :" << endl;
+		cout << "*****************" << endl;
+		cin >> sayi1 >> sayi2;
+		ekok_hesapla(sayi1, sayi2, &sonuc);
+		cout << "*****************" << endl;
+		cout << "\nEkok " << sayi1 << "-" << sayi2 << " = " << sonuc;
+	}
+	else cout << "gecersiz islem !";
+}void ebob_hesapla(int a, int b,int *asonuc) {
+	int kucuk = a,i=2,carpım=1;
+	if (b < a) kucuk = b;
+	while ((a >= 1) || (b >= 1)) {
+		while ((a % i == 0) || (b % i == 0)) {
+			cout << a << "\t" << b << " |" << i << endl;
+			if ((a % i == 0) && (b % i == 0)) {
+				carpım *= i;
+			}
+			if (a % i == 0) a /= i;
+			if (b % i == 0) b /= i;
+		}i++;
+		*asonuc = carpım;
+		if ((a == 1) && (b == 1)) {
+			cout << a << "\t" << b << " |"   << endl;
+			break;
+		}
+		if ((a == 1) || (b == 1)) {
+			continue;
+		}
+		if (i > kucuk) break;
+	}cout << "*****************\nebob degeri :" << carpım << endl;
+}void ekok_hesapla(int c, int d,int *bsonuc) {
+	int kucuk = c, i = 2, carpım = 1;
+	if (d <c) kucuk = d;
+	while ((c >= 1) || (d >= 1)) {
+		while ((c % i == 0) || (d % i == 0)) {
+			cout << c << "\t" << d << " |" << i << endl;
+			if ((c % i == 0) || (d % i == 0)) {
+				carpım *= i;
+			}
+			if (c % i == 0) c /= i;
+			if (d % i == 0) d /= i;
+		}i++;
+		*bsonuc = carpım;
+		if ((c == 1) && (d == 1)) {
+			cout << c << "\t" << d << " |" << endl;
+			break;
+		}
+		if ((c == 1) || (d == 1)) {
+			continue;
+		}
+		if (i > kucuk) break;
+	}cout << "*****************\nekok degeri :" << carpım << endl;
+}
